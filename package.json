@@ -1,10 +1,11 @@
 {
+  "name": "ora",
+  "private": true,
   "browserslist": [
     "last 2 chrome versions",
     "last 2 firefox versions"
   ],
   "dependencies": {
-    "dexie": "^3.0.2",
     "nedb": "^1.8.0",
     "nedb-promises": "^4.0.4",
     "webextension-polyfill": "^0.6.0"
