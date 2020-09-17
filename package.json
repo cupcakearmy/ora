@@ -1,0 +1,18 @@
+{
+  "browserslist": [
+    "last 2 chrome versions",
+    "last 2 firefox versions"
+  ],
+  "dependencies": {
+    "dexie": "^3.0.2",
+    "nedb": "^1.8.0",
+    "nedb-promises": "^4.0.4",
+    "webextension-polyfill": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/firefox-webext-browser": "^78.0.1",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-web-extension": "^1.6.1",
+    "web-ext": "^5.0.0"
+  }
+}
