@@ -1,40 +1,37 @@
 import browser from 'webextension-polyfill'
-// import Dexie from 'dexie'
 
-// const db = new Dexie('myDb')
-// db.version(1).stores({
-//   friends: `name, age`,
-// })
+import { dashboard } from '../shared/utils'
+import { Logs } from '../shared/db'
 
-// import NeDB from 'nedb'
+browser.browserAction.onClicked.addListener(() => browser.tabs.create({ url: dashboard, active: true }))
 
-// const db = new NeDB({filename: 'data.db'})
-// db.insert({planet: 'Earth'})
-import NeDB from 'nedb-promises'
-
-const db = NeDB.create({
-  filename: 'data.db',
-  autoload: true,
-})
-
-async function main() {
-  await db.insert({ planet: 'Earth' })
-  console.log('Docs', await db.find())
-}
-// main()
+const frequency = 3000
 
 async function getAllTabs() {
-  console.log('Getting all tabs')
-  const all = await browser.tabs.query({})
-  for (const tab of all) {
-    console.log(tab.title, tab.id, tab.active, tab.highlighted)
-  }
+  const tabs = await browser.tabs.query({})
+  const windows = await browser.windows.getAll()
+  const active = tabs
+    .filter((tab) => {
+      const window = windows.find((window) => window.id === tab.windowId)
+      return tab.active && window.focused
+    })
+    .map(({ id, title, url }) => {
+      const { host } = new URL(url)
+      return { id, title, host }
+    })
+
+  await Promise.all(
+    active.map(({ host }) => {
+      if (host)
+        return Logs.insert({
+          timestamp: new Date(),
+          host,
+          frequency,
+        })
+    })
+  )
 }
 
 setInterval(() => {
   getAllTabs()
-}, 10000)
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   console.log('Hello from BG')
-// })
+}, frequency)

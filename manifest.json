@@ -8,14 +8,31 @@
   "icons": {
     "512": "icons/timer.png"
   },
+  "browser_action": {
+    "default_icon": {
+      "512": "icons/stopwatch-inv.svg"
+    },
+    "default_title": "Ora Dash",
+    "theme_icons": [
+      {
+        "light": "./icons/stopwatch-inv.svg",
+        "dark": "./icons/stopwatch.svg",
+        "size": 512
+      }
+    ]
+  },
   "permissions": ["<all_urls>", "tabs", "unlimitedStorage", "storage"],
   "background": {
     "scripts": ["./src/background/index.js"]
+  },
+  "options_ui": {
+    "page": "./src/options/index.html"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["borderify.js"]
     }
-  ]
+  ],
+  "web_accessible_resources": ["./icons/stopwatch.svg", "./icons/stopwatch-inv.svg"]
 }

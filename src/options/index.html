@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <link href="../../node_modules/spectre.css/dist/spectre.min.css" rel="stylesheet" />
+    <link href="./main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <main>
+      <h1>Ora</h1>
+      <p>Ora helps you track down time consuming websites</p>
+      <a href="../dashboard/index.html" target="_blank"><button class="btn btn-primary btn-lg">Go to the Dashboard</button></a>
+
+      <br />
+      <br />
+      <br />
+
+      <form id="form">
+        <h4>Settings</h4>
+        <div class="form-group">
+          <label class="form-label">
+            Frequency <small>(Minutes)</small>
+            <input id="frequency" class="form-input" type="number" min="3" step="1" />
+          </label>
+          <label class="form-label">
+            Retention <small>(Days)</small>
+            <input id="retention" class="form-input" type="number" min="3" max="365" step="1" />
+          </label>
+          <button id="reset" type="submit" class="btn">Reset</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </main>
+    <div id="root"></div>
+    <script src="./main.js"></script>
+  </body>
+</html>

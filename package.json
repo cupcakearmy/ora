@@ -1,19 +1,35 @@
 {
   "name": "ora",
   "private": true,
+  "scripts": {
+    "dev": "parcel --no-hmr manifest.json src/dashboard/index.html",
+    "launch": "web-ext run -s dist"
+  },
   "browserslist": [
     "last 2 chrome versions",
     "last 2 firefox versions"
   ],
   "dependencies": {
+    "@amcharts/amcharts4": "^4.10.2",
+    "chart.js": "^2.9.3",
+    "dayjs": "^1.8.36",
+    "faker": "^5.1.0",
+    "google-palette": "^1.1.0",
+    "lodash": "^4.17.20",
     "nedb": "^1.8.0",
     "nedb-promises": "^4.0.4",
+    "spectre.css": "^0.5.9",
+    "tailwindcss": "^1.8.10",
+    "uhrwerk": "^1.0.2",
     "webextension-polyfill": "^0.6.0"
   },
   "devDependencies": {
     "@types/firefox-webext-browser": "^78.0.1",
+    "@types/lodash": "^4.14.161",
     "parcel-bundler": "^1.12.4",
+    "parcel-plugin-svelte": "^4.0.6",
     "parcel-plugin-web-extension": "^1.6.1",
+    "svelte": "^3.25.1",
     "web-ext": "^5.0.0"
   }
 }
