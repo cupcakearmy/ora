@@ -17,6 +17,9 @@
     start = new Date(0)
     end = new Date()
   }
+
+  // Init
+  set('week')()
 </script>
 
 <style>

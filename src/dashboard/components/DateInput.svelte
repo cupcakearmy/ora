@@ -16,4 +16,10 @@
   $: output(internal)
 </script>
 
+<style>
+  input {
+    width: 9em !important;
+  }
+</style>
+
 <input class="form-input input-sm" type="date" bind:value={internal} {name} />

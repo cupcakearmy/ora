@@ -10,12 +10,15 @@
   import { data, countInGroup } from './lib'
   import { env } from 'process'
 
+  let top = 20
+  let full = 50
+
   let loading = true
   let init = false
   let counted
-  let top = 20
-  let start = dayjs().subtract(3, 'days').toDate()
-  let end = new Date()
+
+  let start
+  let end
   let topData = {
     labels: [],
     data: [],
@@ -48,8 +51,7 @@
   onMount(() => {
     setTimeout(() => {
       init = true
-      // calculate()
-    }, 250)
+    }, 25)
   })
 </script>
 
@@ -61,10 +63,6 @@
     max-width: 50em;
   }
 
-  /* .date > .spacer {
-    width: 1em;
-  } */
-
   .link {
     margin-left: 2em;
   }
@@ -73,23 +71,31 @@
   th {
     padding: 0.25em;
   }
+
+  h3 {
+    margin-right: 1em;
+  }
 </style>
 
 <Dev />
 <div class="top rounded">
-  <div class="flex justify-between items-center">
-    <h2 class="text-4xl">Top {top}</h2>
+  <h1 class="text-6xl mb-4">Ora</h1>
+  <div class="flex justify-end items-center mb-2">
+    <h3>Time Range</h3>
     <RangeChooser bind:start bind:end />
   </div>
   {#if loading}
     <div class="loading loading-lg" />
   {:else if counted}
+    <h2 class="text-2xl">Top {top}</h2>
+    <b>Chart</b>
+    <h2 class="text-2xl mt-4">Top {full}</h2>
     <table class="table">
       <tr>
         <th>Time Spent</th>
         <th>Host</th>
       </tr>
-      {#each counted as { host, total, human }}
+      {#each counted.slice(0, 100) as { host, total, human }}
         <tr>
           <td>{human}</td>
           <td class="link"><a href={'https://' + host}>{host}</a></td>
