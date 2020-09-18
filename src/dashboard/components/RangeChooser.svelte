@@ -1,0 +1,41 @@
+<script>
+  import dj from 'dayjs'
+
+  import DateInput from './DateInput.svelte'
+
+  export let start
+  export let end
+
+  function set(interval, amount = 1) {
+    return () => {
+      start = dj().subtract(amount, interval).toDate()
+      end = new Date()
+    }
+  }
+
+  function all() {
+    start = new Date(0)
+    end = new Date()
+  }
+</script>
+
+<style>
+  .spacer {
+    width: 0.5em;
+  }
+</style>
+
+<!-- <div class="flex flex-col"> -->
+<div class="flex items-center">
+  <div class="btn-group">
+    <button class="btn btn-sm" on:click={all}>All</button>
+    <button class="btn btn-sm" on:click={set('month')}>Month</button>
+    <button class="btn btn-sm" on:click={set('week')}>Week</button>
+    <button class="btn btn-sm" on:click={set('day')}>Day</button>
+  </div>
+  <div class="spacer" />
+  <div class="input-group">
+    <DateInput bind:date={start} />
+    <DateInput bind:date={end} />
+  </div>
+</div>

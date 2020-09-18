@@ -3,29 +3,25 @@
   import day from 'dayjs'
   import { range, random } from 'lodash'
 
-  import { Logs } from '../../shared/db'
+  import { insertLog, normalizeTimestamp } from '../../shared/db'
 
   let loading = false
 
   async function fill() {
     try {
       loading = true
-
       const start = day().subtract('7', 'days').valueOf()
       const end = Date.now()
-
-      const all = []
-      for (const n of range(50)) {
+      for (const n of range(20)) {
         const host = faker.internet.domainName()
-        for (const m of range(random(500))) {
-          const frequency = random(1, 10) * 1000
-          const timestamp = new Date(random(start, end))
-          all.push({ host, timestamp, frequency })
+        for (const m of range(random(20))) {
+          const date = new Date(random(start, end))
+          const timestamp = normalizeTimestamp(date)
+          const seconds = random(15 * 60)
+          // console.log(host, date, seconds)
+          await insertLog({ host, timestamp, seconds })
         }
       }
-      console.log(`Generated ${all.length} data points`)
-      console.debug(all)
-      await Logs.insert(all)
     } finally {
       loading = false
     }

@@ -1,68 +1,115 @@
 <script>
+  import * as am4core from '@amcharts/amcharts4/core'
+  import * as am4charts from '@amcharts/amcharts4/charts'
+  import am4themes_frozen from '@amcharts/amcharts4/themes/frozen'
+  import am4themes_animated from '@amcharts/amcharts4/themes/animated'
   import { onMount } from 'svelte'
 
-  import Chart from 'chart.js'
-  import palette from 'google-palette'
+  /* Chart code */
+  // Themes begin
+  am4core.useTheme(am4themes_frozen)
+  am4core.useTheme(am4themes_animated)
 
-  Chart.defaults.global.legend.display = false
+  let el
+  let chart
 
-  export let type = 'horizontalBar'
-  export let data = {
-    labels: [],
-    data: [],
-  }
-  export let options = {
-    scales: {
-      xAxes: [
-        {
-          // type: 'logarithmic',
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
+  export let data = [
+    {
+      network: 'Facebook',
+      MAU: 2255250000,
     },
-  }
+    {
+      network: 'Google+',
+      MAU: 430000000,
+    },
+    {
+      network: 'Instagram',
+      MAU: 1000000000,
+    },
+    {
+      network: 'Pinterest',
+      MAU: 246500000,
+    },
+    {
+      network: 'Reddit',
+      MAU: 355000000,
+    },
+    {
+      network: 'TikTok',
+      MAU: 500000000,
+    },
+    {
+      network: 'Tumblr',
+      MAU: 624000000,
+    },
+    {
+      network: 'Twitter',
+      MAU: 329500000,
+    },
+    {
+      network: 'WeChat',
+      MAU: 1000000000,
+    },
+    {
+      network: 'Weibo',
+      MAU: 431000000,
+    },
+    {
+      network: 'Whatsapp',
+      MAU: 1433333333,
+    },
+    {
+      network: 'YouTube',
+      MAU: 1900000000,
+    },
+  ]
 
-  let ctx
-  let mounted
-
-  function draw() {
-    const backgroundColor = palette('rainbow', data.data.length).map((color) => '#' + color + '88')
-
-    new Chart(ctx, {
-      type,
-      options,
-      data: {
-        labels: data.labels,
-        datasets: [
-          {
-            data: data.data,
-            // backgroundColor: backgroundColor,
-            backgroundColor: '#dddddd',
-            borderColor: '#000000',
-            borderWidth: 1,
-          },
-        ],
-      },
-    })
-  }
-
-  $: if (mounted) {
-    data
-    draw()
+  $: if (chart) {
+    chart.data = data
   }
 
   onMount(() => {
-    mounted = true
+    chart = am4core.create(el, am4charts.XYChart)
+
+    let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis())
+    categoryAxis.renderer.grid.template.location = 0
+    categoryAxis.dataFields.category = 'host'
+    categoryAxis.renderer.minGridDistance = 1
+    categoryAxis.renderer.inversed = true
+    categoryAxis.renderer.grid.template.disabled = true
+
+    let valueAxis = chart.xAxes.push(new am4charts.ValueAxis())
+    valueAxis.min = 0
+
+    let series = chart.series.push(new am4charts.ColumnSeries())
+    series.dataFields.categoryY = 'host'
+    series.dataFields.valueX = 'total'
+    series.columns.template.strokeOpacity = 0
+    series.columns.template.column.cornerRadiusBottomRight = 5
+    series.columns.template.column.cornerRadiusTopRight = 5
+
+    let labelBullet = series.bullets.push(new am4charts.LabelBullet())
+    labelBullet.label.horizontalCenter = 'left'
+    labelBullet.label.dx = 10
+    labelBullet.label.text = '{values.valueX.workingValue}'
+    // labelBullet.label.text = "{values.valueX.workingValue.formatNumber('#.0as')}"
+    labelBullet.locationX = 1
+
+    // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
+    series.columns.template.adapter.add('fill', function (fill, target) {
+      return chart.colors.getIndex(target.dataItem.index)
+    })
+
+    categoryAxis.sortBySeries = series
+    chart.data = data
   })
 </script>
 
 <style>
-  canvas {
+  div {
     width: 100%;
-    height: 20em;
+    height: 32em;
   }
 </style>
 
-<canvas bind:this={ctx} />
+<div bind:this={el}>chart</div>

@@ -1,15 +1,17 @@
 <script>
-  import DateInput from './components/Date.svelte'
-  import Chart from './components/Chart.svelte'
+  import DateInput from './components/DateInput.svelte'
+  // import Chart from './components/Chart.svelte'
   import Dev from './components/Dev.svelte'
+  import RangeChooser from './components/RangeChooser.svelte'
 
   import { onMount } from 'svelte'
   import dayjs from 'dayjs'
-  import { Duration } from 'uhrwerk'
 
   import { data, countInGroup } from './lib'
   import { env } from 'process'
 
+  let loading = true
+  let init = false
   let counted
   let top = 20
   let start = dayjs().subtract(3, 'days').toDate()
@@ -20,12 +22,16 @@
   }
 
   async function calculate() {
-    console.log('Calculating')
-    const logs = await data({
-      start,
-      end: dayjs(end).endOf('day'),
-    })
-    counted = countInGroup(logs)
+    try {
+      loading = true
+      const logs = await data({
+        start,
+        end: dayjs(end).endOf('day'),
+      })
+      counted = countInGroup(logs)
+    } finally {
+      loading = false
+    }
     // const onlyTop = counted.slice(0, top)
     // console.log(onlyTop)
     // topData = {
@@ -34,13 +40,16 @@
     // }
   }
 
-  $: {
+  $: if (init) {
     start, end
     calculate()
   }
 
   onMount(() => {
-    calculate()
+    setTimeout(() => {
+      init = true
+      // calculate()
+    }, 250)
   })
 </script>
 
@@ -52,9 +61,9 @@
     max-width: 50em;
   }
 
-  .date > .spacer {
+  /* .date > .spacer {
     width: 1em;
-  }
+  } */
 
   .link {
     margin-left: 2em;
@@ -70,22 +79,19 @@
 <div class="top rounded">
   <div class="flex justify-between items-center">
     <h2 class="text-4xl">Top {top}</h2>
-    <div class="date flex px-1 rounded">
-      <DateInput bind:date={start} />
-      <div class="spacer" />
-      <DateInput bind:date={end} />
-    </div>
+    <RangeChooser bind:start bind:end />
   </div>
-  {#if counted}
-    <Chart data={counted.slice(0, top)} />
-    <table>
+  {#if loading}
+    <div class="loading loading-lg" />
+  {:else if counted}
+    <table class="table">
       <tr>
         <th>Time Spent</th>
         <th>Host</th>
       </tr>
       {#each counted as { host, total, human }}
         <tr>
-          <td><b>{human}</b></td>
+          <td>{human}</td>
           <td class="link"><a href={'https://' + host}>{host}</a></td>
         </tr>
       {/each}

@@ -1,10 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Borderify",
-  "version": "1.0",
-
-  "description": "Adds a red border to all webpages matching mozilla.org.",
-
+  "name": "Ora",
+  "version": "0.1",
+  "description": "See how much time you spend on each website",
   "icons": {
     "512": "icons/timer.png"
   },
@@ -12,7 +10,7 @@
     "default_icon": {
       "512": "icons/stopwatch-inv.svg"
     },
-    "default_title": "Ora Dash",
+    "default_title": "Ora Dashboard",
     "theme_icons": [
       {
         "light": "./icons/stopwatch-inv.svg",

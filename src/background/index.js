@@ -1,13 +1,14 @@
 import browser from 'webextension-polyfill'
 
 import { dashboard } from '../shared/utils'
-import { Logs } from '../shared/db'
+import { insertLog, normalizeTimestamp } from '../shared/db'
 
 browser.browserAction.onClicked.addListener(() => browser.tabs.create({ url: dashboard, active: true }))
 
 const frequency = 3000
 
 async function getAllTabs() {
+  console.log('Checking...')
   const tabs = await browser.tabs.query({})
   const windows = await browser.windows.getAll()
   const active = tabs
@@ -23,10 +24,10 @@ async function getAllTabs() {
   await Promise.all(
     active.map(({ host }) => {
       if (host)
-        return Logs.insert({
-          timestamp: new Date(),
+        return insertLog({
+          timestamp: normalizeTimestamp(new Date()),
           host,
-          frequency,
+          seconds: (frequency / 1000) | 0,
         })
     })
   )
