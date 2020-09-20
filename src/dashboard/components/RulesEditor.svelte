@@ -23,7 +23,8 @@
   }
 
   async function save() {
-    await Limits.update({ host: limit.host }, limit, { upsert: true })
+    const { _id, ...rest } = limit
+    await Limits.update({ _id }, rest, { upsert: true })
     dispatch('update')
     close()
   }
