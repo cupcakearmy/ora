@@ -18,7 +18,6 @@
           const date = new Date(random(start, end))
           const timestamp = normalizeTimestamp(date)
           const seconds = random(15 * 60)
-          // console.log(host, date, seconds)
           await insertLog({ host, timestamp, seconds })
         }
       }
