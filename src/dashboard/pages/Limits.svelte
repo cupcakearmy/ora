@@ -46,15 +46,15 @@
 {#if Array.isArray(limits)}
   <table class="table">
     <tr>
-      <th>Host</th>
+      <th class="w-32">Host</th>
       <th>Rules</th>
-      <th class="text-right">Actions</th>
+      <th class="text-right w-32">Actions</th>
     </tr>
     {#each limits as { host, rules, _id }}
       <tr>
         <td>{host}</td>
         <td>
-          <Rules {rules} />
+          <Rules {rules} {host} />
         </td>
         <td class="text-right">
           <div class="btn-group">
