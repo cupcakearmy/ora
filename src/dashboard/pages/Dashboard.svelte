@@ -1,8 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import dayjs from 'dayjs'
 
-  import DateInput from '../components/DateInput.svelte'
   import Chart from '../components/Chart.svelte'
   import RangeChooser from '../components/RangeChooser.svelte'
 
@@ -12,8 +10,8 @@
   let full = 50
 
   let loading = true
-  let init = false
   let counted = []
+  let timeout
 
   let start
   let end
@@ -23,7 +21,7 @@
       loading = true
       const logs = await data({
         start,
-        end: dayjs(end).endOf('day'),
+        end,
       })
       counted = countInGroup(logs)
     } finally {
@@ -31,18 +29,15 @@
     }
   }
 
-  $: if (init) {
-    start, end
-    calculate()
-  }
-
   $: topData = counted.slice(0, top).map(({ total, host, human }) => ({ value: total, name: host, human }))
 
-  onMount(() => {
-    setTimeout(() => {
-      init = true
-    }, 25)
-  })
+  $: {
+    start, end
+    clearTimeout(timeout)
+    timeout = setTimeout(calculate, 5)
+  }
+
+  onMount(calculate)
 </script>
 
 <style>

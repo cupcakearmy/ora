@@ -8,8 +8,8 @@
 
   function set(interval, amount = 1) {
     return () => {
-      start = dj().subtract(amount, interval).toDate()
-      end = new Date()
+      start = dj().subtract(amount, interval).startOf('day').toDate()
+      end = dj().endOf('day').toDate()
     }
   }
 
