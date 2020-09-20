@@ -1,10 +1,5 @@
 import { each, groupBy, orderBy } from 'lodash'
 import dj from 'dayjs'
-import RelativeTime from 'dayjs/plugin/relativeTime'
-import Duration from 'dayjs/plugin/duration'
-
-dj.extend(Duration)
-dj.extend(RelativeTime)
 
 import { Logs } from '../shared/db'
 
@@ -31,4 +26,10 @@ export function countInGroup(grouped) {
     }
   })
   return orderBy(counted, 'total', 'desc')
+}
+
+export function longPress(node, fn) {
+  let timeout
+  node.addEventListener('mousedown', () => (timeout = setTimeout(fn, 500)), false)
+  node.addEventListener('mouseup', () => clearTimeout(timeout), false)
 }

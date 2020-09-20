@@ -3,7 +3,7 @@
   import day from 'dayjs'
   import { range, random } from 'lodash'
 
-  import { insertLog, normalizeTimestamp } from '../../shared/db'
+  import { insertLog, normalizeTimestamp, clear as clearDB } from '../../shared/db'
 
   let loading = false
 
@@ -30,14 +30,22 @@
   async function clear() {
     try {
       loading = true
-      await Logs.remove({}, { multi: true })
+      await clearDB()
     } finally {
       loading = false
     }
   }
 </script>
 
+<style>
+  div {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+</style>
+
 <div class="p-2">
-  <button class="btn" class:loading disabled={loading} on:click={fill}>Add Random Data</button>
-  <button class="btn btn-error" class:loading disabled={loading} on:click={clear}>Delete data</button>
+  <button class="btn btn-sm" class:loading disabled={loading} on:click={fill}>Add Random Data</button>
+  <button class="btn btn-sm btn-error" class:loading disabled={loading} on:click={clear}>Delete data</button>
 </div>

@@ -6,6 +6,15 @@ export const Logs = NeDB.create({
   autoload: true,
 })
 
+export const Limits = NeDB.create({
+  filename: 'limits.db',
+  autoload: true,
+})
+
+export function clear() {
+  return Promise.all([Logs.remove({}, { multi: true }), Limits.remove({}, { multi: true })])
+}
+
 export function normalizeTimestamp(timestamp) {
   // Normalize every dato to 15 minutes
   const t = day(timestamp)

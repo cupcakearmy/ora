@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "parcel watch --no-hmr manifest.json src/dashboard/index.html",
-    "build": "parcel build manifest.json src/dashboard/index.html",
+    "build": "parcel build --no-content-hash --no-source-maps manifest.json src/dashboard/index.html",
     "launch": "web-ext run -s dist"
   },
   "browserslist": [
@@ -11,12 +11,14 @@
     "last 2 firefox versions"
   ],
   "dependencies": {
+    "d3": "^6.1.1",
     "dayjs": "^1.8.36",
     "faker": "^5.1.0",
     "lodash": "^4.17.20",
     "nedb": "^1.8.0",
     "nedb-promises": "^4.0.4",
     "spectre.css": "^0.5.9",
+    "svelte-spa-router": "^2.2.0",
     "tailwindcss": "^1.8.10",
     "webextension-polyfill": "^0.6.0"
   },
