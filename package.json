@@ -4,7 +4,7 @@
   "scripts": {
     "clean": "rm -rf dist .cache",
     "dev": "parcel watch --no-hmr manifest.json src/dashboard/index.html",
-    "build": "parcel build --no-content-hash --no-source-maps manifest.json src/dashboard/index.html"
+    "build": "parcel build --no-content-hash --no-source-maps --no-minify manifest.json src/dashboard/index.html"
   },
   "browserslist": [
     "last 2 chrome versions",
