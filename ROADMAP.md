@@ -2,11 +2,10 @@
 
 ## Current
 
-- d3 graph
+- Max time for website -> block.
 
 ## Backlog
 
-- Max time for website -> block
 - Dark mode support
   - Options
   - Dashboard

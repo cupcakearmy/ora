@@ -4,7 +4,7 @@
   import Chart from '../components/Chart.svelte'
   import RangeChooser from '../components/RangeChooser.svelte'
 
-  import { data, countInGroup } from '../lib'
+  import { data, countInGroup } from '../../shared/lib'
 
   let top = 15
   let full = 50

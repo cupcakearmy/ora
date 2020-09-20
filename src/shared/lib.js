@@ -1,7 +1,7 @@
 import { groupBy, orderBy, sum } from 'lodash'
 import dj from 'dayjs'
 
-import { Logs } from '../shared/db'
+import { Limits, Logs } from './db.js'
 
 export async function data({ start, end }) {
   const logs = await getLogsBetweenDates({ start, end })
@@ -50,4 +50,15 @@ export function getUsageForRules(host, rules) {
     const consumed = sum(logs.map((log) => log.seconds))
     return (consumed / limitAsSeconds) * 100
   })
+}
+
+export async function getUsageForHost(host) {
+  const limit = await Limits.findOne({ host })
+  return await Promise.all(getUsageForRules(host, limit.rules))
+}
+
+export function percentagesToBool(percentages) {
+  const blocked = percentages.map((p) => p >= 100).includes(true)
+  console.log(percentages, blocked)
+  return blocked
 }

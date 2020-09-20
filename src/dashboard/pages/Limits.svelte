@@ -5,7 +5,7 @@
   import Rules from '../components/Rules.svelte'
 
   import { Limits } from '../../shared/db.js'
-  import { longPress } from '../lib'
+  import { longPress } from '../../shared/lib'
 
   let limits = null
   let limit = null

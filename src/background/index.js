@@ -1,7 +1,8 @@
 import browser from 'webextension-polyfill'
 
 import { dashboard } from '../shared/utils'
-import { insertLog, normalizeTimestamp } from '../shared/db'
+import { insertLog, normalizeTimestamp, Limits } from '../shared/db'
+import { getUsageForHost, percentagesToBool } from '../shared/lib'
 
 browser.browserAction.onClicked.addListener(() => browser.tabs.create({ url: dashboard, active: true }))
 
@@ -37,3 +38,8 @@ async function getAllTabs() {
 setInterval(() => {
   getAllTabs()
 }, frequency)
+
+browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  // await Limits.
+  return getUsageForHost(message).then((percentages) => percentagesToBool(percentages))
+})

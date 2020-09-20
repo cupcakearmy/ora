@@ -1,16 +1,9 @@
 <script>
   import Router, { link } from 'svelte-spa-router'
 
-  import dj from 'dayjs'
-  import RelativeTime from 'dayjs/plugin/relativeTime'
-  import Duration from 'dayjs/plugin/duration'
-
   import Dev from './components/Dev.svelte'
   import Dashboard from './pages/Dashboard.svelte'
   import Limits from './pages/Limits.svelte'
-
-  dj.extend(Duration)
-  dj.extend(RelativeTime)
 
   const routes = {
     '/': Dashboard,

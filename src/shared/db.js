@@ -1,5 +1,10 @@
 import NeDB from 'nedb-promises'
-import day from 'dayjs'
+import dj from 'dayjs'
+import RelativeTime from 'dayjs/plugin/relativeTime'
+import Duration from 'dayjs/plugin/duration'
+
+dj.extend(Duration)
+dj.extend(RelativeTime)
 
 export const Logs = NeDB.create({
   filename: 'logs.db',
@@ -17,7 +22,7 @@ export function clear() {
 
 export function normalizeTimestamp(timestamp) {
   // Normalize every dato to 15 minutes
-  const t = day(timestamp)
+  const t = dj(timestamp)
   const min = t.minute()
   return t
     .millisecond(0)

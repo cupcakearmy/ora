@@ -1,7 +1,7 @@
 <script>
   import dj from 'dayjs'
 
-  import { getUsageForRules } from '../lib.js'
+  import { getUsageForRules } from '../../shared/lib.js'
 
   export let host = ''
   export let rules = []

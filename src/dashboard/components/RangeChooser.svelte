@@ -1,10 +1,11 @@
 <script>
+  import { onMount } from 'svelte'
   import dj from 'dayjs'
 
   import DateInput from './DateInput.svelte'
 
-  export let start
-  export let end
+  export let start = new Date()
+  export let end = new Date()
 
   function set(interval, amount = 1) {
     return () => {
@@ -19,7 +20,7 @@
   }
 
   // Init
-  set('week')()
+  onMount(() => set('day', 0)())
 </script>
 
 <style>
