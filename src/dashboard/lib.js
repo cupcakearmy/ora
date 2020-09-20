@@ -5,14 +5,17 @@ import { Logs } from '../shared/db'
 
 export async function data({ start, end }) {
   const logs = await getLogsBetweenDates({ start, end })
-  console.log('Found', logs.length)
   return groupBy(logs, 'host')
 }
 
-export async function getLogsBetweenDates({ start, end }) {
-  return await Logs.find({
+export async function getLogsBetweenDates({ start, end, host }) {
+  const where = {
     $and: [{ timestamp: { $gt: start } }, { timestamp: { $lt: end } }],
-  })
+  }
+  console.log(host)
+  if (host) where.host = host
+  console.log('Where', where)
+  return await Logs.find(where)
 }
 
 export function countInGroup(grouped) {
