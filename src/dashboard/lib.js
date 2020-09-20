@@ -12,9 +12,7 @@ export async function getLogsBetweenDates({ start, end, host }) {
   const where = {
     $and: [{ timestamp: { $gt: start } }, { timestamp: { $lt: end } }],
   }
-  console.log(host)
   if (host) where.host = host
-  console.log('Where', where)
   return await Logs.find(where)
 }
 
