@@ -1,4 +1,4 @@
-import { each, groupBy, orderBy } from 'lodash'
+import { groupBy, orderBy, sum } from 'lodash'
 import dj from 'dayjs'
 
 import { Logs } from '../shared/db'
@@ -33,4 +33,21 @@ export function longPress(node, fn) {
   let timeout
   node.addEventListener('mousedown', () => (timeout = setTimeout(fn, 500)), false)
   node.addEventListener('mouseup', () => clearTimeout(timeout), false)
+}
+
+export function getUsageForRules(host, rules) {
+  return rules.map(async ({ every, limit }) => {
+    const limitAsSeconds = dj.duration(...limit).asSeconds()
+    const everyAsSeconds = dj.duration(...every).asSeconds()
+
+    const logs = await getLogsBetweenDates({
+      start: dj().subtract(everyAsSeconds, 's').toDate(),
+      end: new Date(),
+      host,
+    })
+
+    // Calculate usage in percentage 0-100
+    const consumed = sum(logs.map((log) => log.seconds))
+    return (consumed / limitAsSeconds) * 100
+  })
 }

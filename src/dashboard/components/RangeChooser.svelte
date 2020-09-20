@@ -32,9 +32,10 @@
 <div class="flex items-center">
   <div class="btn-group">
     <button class="btn btn-sm" on:click={all}>All</button>
-    <button class="btn btn-sm" on:click={set('month')}>Month</button>
-    <button class="btn btn-sm" on:click={set('week')}>Week</button>
-    <button class="btn btn-sm" on:click={set('day')}>Day</button>
+    <button class="btn btn-sm" on:click={set('month', 1)}>Month</button>
+    <button class="btn btn-sm" on:click={set('week', 1)}>Week</button>
+    <button class="btn btn-sm" on:click={set('day', 3)}>3 Days</button>
+    <button class="btn btn-sm" on:click={set('day', 0)}>Today</button>
   </div>
   <div class="spacer" />
   <div class="input-group">

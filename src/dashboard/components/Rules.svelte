@@ -1,28 +1,12 @@
 <script>
   import dj from 'dayjs'
-  import { sum } from 'lodash'
 
-  import { Logs } from '../../shared/db.js'
-  import { getLogsBetweenDates } from '../lib.js'
+  import { getUsageForRules } from '../lib.js'
 
   export let host = ''
   export let rules = []
 
-  $: percentages = rules.map(async ({ every }) => {
-    const durationAsSeconds = dj.duration(...every).asSeconds()
-    const start = dj().subtract(durationAsSeconds, 's').toDate()
-    console.log(start)
-    const logs = await getLogsBetweenDates({
-      start,
-      end: new Date(),
-      host,
-    })
-    console.log(logs)
-
-    const consumed = sum(logs.map((log) => log.seconds))
-    return (consumed / durationAsSeconds) * 100
-    console.log(total, dj.duration(total, 's').humanize())
-  })
+  $: percentages = getUsageForRules(host, rules)
 </script>
 
 {#each rules as rule, i}
