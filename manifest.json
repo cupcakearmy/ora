@@ -4,17 +4,17 @@
   "version": "0.1",
   "description": "See how much time you spend on each website",
   "icons": {
-    "512": "icons/timer.png"
+    "512": "icons/watch.svg"
   },
   "browser_action": {
     "default_icon": {
-      "512": "icons/stopwatch-inv.svg"
+      "512": "icons/watch.svg"
     },
     "default_title": "Ora Dashboard",
     "theme_icons": [
       {
-        "light": "./icons/stopwatch-inv.svg",
-        "dark": "./icons/stopwatch.svg",
+        "light": "./icons/watch.svg",
+        "dark": "./icons/watch.svg",
         "size": 512
       }
     ]
@@ -32,5 +32,5 @@
       "js": ["./src/client/index.js"]
     }
   ],
-  "web_accessible_resources": ["./icons/stopwatch.svg", "./icons/stopwatch-inv.svg"]
+  "web_accessible_resources": ["./icons/watch.svg"]
 }
