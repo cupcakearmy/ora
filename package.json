@@ -1,10 +1,12 @@
 {
   "name": "ora",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "clean": "rm -rf dist .cache",
     "dev": "parcel watch --no-hmr manifest.json src/dashboard/index.html",
-    "build": "parcel build --no-content-hash --no-source-maps --no-minify manifest.json src/dashboard/index.html"
+    "build": "parcel build --no-content-hash --no-source-maps --no-minify manifest.json src/dashboard/index.html",
+    "dist": "rm -rf dist && yarn run build && web-ext build -s dist --overwrite-dest"
   },
   "browserslist": [
     "last 2 chrome versions",
@@ -28,6 +30,6 @@
     "parcel-plugin-svelte": "^4.0.6",
     "parcel-plugin-web-extension": "^1.6.1",
     "svelte": "^3.25.1",
-    "web-ext": "^5.0.0"
+    "web-ext": "^5.2.0"
   }
 }

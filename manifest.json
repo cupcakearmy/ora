@@ -1,8 +1,9 @@
 {
   "manifest_version": 2,
   "name": "Ora",
-  "version": "0.1",
-  "description": "See how much time you spend on each website",
+  "version": "0.2",
+
+  "description": "See how much time you spend on each website and set limits",
   "icons": {
     "512": "icons/watch.svg"
   },
