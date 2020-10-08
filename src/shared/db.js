@@ -1,24 +1,16 @@
-import NeDB from 'nedb-promises'
 import dj from 'dayjs'
+import Dexie from 'dexie'
 import RelativeTime from 'dayjs/plugin/relativeTime'
 import Duration from 'dayjs/plugin/duration'
 
 dj.extend(Duration)
 dj.extend(RelativeTime)
 
-export const Logs = NeDB.create({
-  filename: 'logs.db',
-  autoload: true,
+export const DB = new Dexie('ora')
+DB.version(2).stores({
+  logs: `++id, host, timestamp`,
+  limits: `++id, host`,
 })
-
-export const Limits = NeDB.create({
-  filename: 'limits.db',
-  autoload: true,
-})
-
-export function clear() {
-  return Promise.all([Logs.remove({}, { multi: true }), Limits.remove({}, { multi: true })])
-}
 
 export function normalizeTimestamp(timestamp) {
   // Normalize every dato to 15 minutes
@@ -32,12 +24,8 @@ export function normalizeTimestamp(timestamp) {
 }
 
 export async function insertLog({ timestamp, host, seconds }) {
-  Logs.update(
-    {
-      host,
-      timestamp,
-    },
-    { $inc: { seconds } },
-    { upsert: true }
-  )
+  const saved = await DB.logs.where({ host, timestamp }).first()
+  const data = Object.assign({ host, timestamp, seconds: 0 }, saved)
+  data.seconds += seconds
+  await DB.logs.put(data)
 }

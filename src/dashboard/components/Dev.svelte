@@ -3,7 +3,7 @@
   import day from 'dayjs'
   import { range, random } from 'lodash'
 
-  import { insertLog, normalizeTimestamp, clear as clearDB } from '../../shared/db'
+  import { insertLog, normalizeTimestamp, DB } from '../../shared/db'
 
   let loading = false
 
@@ -29,7 +29,8 @@
   async function clear() {
     try {
       loading = true
-      await clearDB()
+      await DB.limits.clear()
+      await DB.logs.clear()
     } finally {
       loading = false
     }

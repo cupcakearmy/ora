@@ -4,7 +4,7 @@
   import RulesEditor from '../components/RulesEditor.svelte'
   import Rules from '../components/Rules.svelte'
 
-  import { Limits } from '../../shared/db.js'
+  import { DB } from '../../shared/db.js'
   import { longPress } from '../../shared/lib'
 
   let limits = null
@@ -15,15 +15,15 @@
   }
 
   function edit(id) {
-    limit = limits.find((limit) => limit._id === id)
+    limit = limits.find((limit) => limit.id === id)
   }
 
   async function load() {
-    limits = await Limits.find()
+    limits = await DB.limits.toArray()
   }
 
   async function del(id) {
-    await Limits.remove({ _id: id })
+    await DB.limits.delete(id)
     await load()
   }
 
@@ -50,7 +50,7 @@
       <th>Rules</th>
       <th class="text-right w-32">Actions</th>
     </tr>
-    {#each limits as { host, rules, _id }}
+    {#each limits as { host, rules, id }}
       <tr>
         <td>{host}</td>
         <td>
@@ -58,8 +58,8 @@
         </td>
         <td class="text-right">
           <div class="btn-group">
-            <button class="btn btn-sm btn-primary" on:click={() => edit(_id)}>Edit</button>
-            <button class="btn btn-sm btn-error tooltip" data-tooltip="Hold to delete" use:longPress={() => del(_id)}>
+            <button class="btn btn-sm btn-primary" on:click={() => edit(id)}>Edit</button>
+            <button class="btn btn-sm btn-error tooltip" data-tooltip="Hold to delete" use:longPress={() => del(id)}>
               Delete
             </button>
           </div>

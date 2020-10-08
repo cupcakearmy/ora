@@ -34,7 +34,6 @@ function init() {
 
 async function check() {
   if (window.document.hidden) return
-  console.log('Checking')
   const isBlocked = await browser.runtime.sendMessage(window.location.host)
   wrapper.style.display = isBlocked ? 'initial' : 'none'
 }

@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte'
   import { cloneDeep } from 'lodash'
 
-  import { Limits } from '../../shared/db'
+  import { DB } from '../../shared/db'
 
   const dispatch = createEventDispatcher()
   const init = { limit: ['1', 'h'], every: [1, 'd'] }
@@ -23,8 +23,7 @@
   }
 
   async function save() {
-    const { _id, ...rest } = limit
-    await Limits.update({ _id }, rest, { upsert: true })
+    await DB.limits.put(limit)
     dispatch('update')
     close()
   }
@@ -41,7 +40,8 @@
       <div class="content">
         {#if limit}
           <label class="form-label">
-            Host <input type="text" class="form-input" placeholder="google.com" bind:value={limit.host} />
+            Host
+            <input type="text" class="form-input" placeholder="google.com" bind:value={limit.host} />
           </label>
 
           <div class="form-label">Rules</div>

@@ -1,7 +1,7 @@
 import { groupBy, orderBy, sum } from 'lodash'
 import dj from 'dayjs'
 
-import { Limits, Logs } from './db.js'
+import { DB } from './db.js'
 
 export async function data({ start, end }) {
   const logs = await getLogsBetweenDates({ start, end })
@@ -9,11 +9,9 @@ export async function data({ start, end }) {
 }
 
 export async function getLogsBetweenDates({ start, end, host }) {
-  const where = {
-    $and: [{ timestamp: { $gt: start } }, { timestamp: { $lt: end } }],
-  }
-  if (host) where.host = host
-  return await Logs.find(where)
+  let query = DB.logs.where('timestamp').inAnyRange([[start, end]])
+  if (host) query = query.filter((x) => x.host === host)
+  return await query.toArray()
 }
 
 export function countInGroup(grouped) {
@@ -53,12 +51,11 @@ export function getUsageForRules(host, rules) {
 }
 
 export async function getUsageForHost(host) {
-  const limit = await Limits.findOne({ host })
+  const limit = await DB.limits.where({ host }).first()
   return await Promise.all(getUsageForRules(host, limit.rules))
 }
 
 export function percentagesToBool(percentages) {
   const blocked = percentages.map((p) => p >= 100).includes(true)
-  console.log(percentages, blocked)
   return blocked
 }

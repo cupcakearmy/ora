@@ -39,7 +39,6 @@ setInterval(() => {
   getAllTabs()
 }, frequency)
 
-browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-  // await Limits.
+browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return getUsageForHost(message).then((percentages) => percentagesToBool(percentages))
 })
