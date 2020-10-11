@@ -1,38 +1,24 @@
 <script>
   import * as d3 from 'd3'
-  import { map, min, max } from 'lodash'
+  import { map, max } from 'lodash'
   import { onMount } from 'svelte'
 
   let wrapper
 
-  export let data = [
-    // { lang: 'ts', popularity: 10 },
-    // { lang: 'js', popularity: 7 },
-    // { lang: 'py', popularity: 9 },
-    // { lang: 'rs', popularity: 8 },
+  export let data = []
 
-    // { year: 2018, value: 8 },
-    // { year: 2019, value: 9 },
-    // { year: 2020, value: 3 },
+  function render() {
+    if (!wrapper) return
 
-    { cat: 'Phillip', value: 10 },
-    { cat: 'Rita', value: 12 },
-    { cat: 'Tom', value: 20 },
-    { cat: 'Oscar', value: 19 },
-    { cat: 'Lulu', value: 8 },
-    { cat: 'Keko', value: 14 },
-    { cat: 'Lena', value: 9 },
-  ]
-
-  onMount(async () => {
     // Dynamic left padding depending on the labels
     const longestKey = max(map(data, (d) => d.name.length))
-    const mt = Math.min(longestKey * 6, 120)
-    const margin = { left: mt, top: 50, bottom: 50, right: 50 }
+    const baseMargin = 35
+    const ml = Math.min(longestKey * 6.3, 120) + baseMargin
+    const margin = { left: ml, top: baseMargin, bottom: baseMargin, right: baseMargin }
     const styles = window.getComputedStyle(wrapper)
     const barHeight = 20
     const width = parseInt(styles.width)
-    const height = Math.ceil(data.length * 1.5 * barHeight)
+    const height = Math.ceil(data.length * 1.25 * barHeight + (margin.top + margin.bottom))
 
     const svg = d3.select(wrapper).attr('viewBox', [0, 0, width, height])
 
@@ -64,7 +50,7 @@
     // Bars
     svg
       .append('g')
-      .attr('fill', 'steelblue')
+      .attr('fill', '#17bbac')
       .selectAll('rect')
       .data(data)
       .join('rect')
@@ -89,7 +75,7 @@
       .text((d) => d.human)
       .call((text) =>
         text
-          .filter((d) => x(d.value) - x(0) < d.human.length * 7) // short bars
+          .filter((d) => x(d.value) - x(0) < d.human.length * 8) // short bars
           .attr('dx', +4)
           .attr('fill', 'black')
           .attr('text-anchor', 'start')
@@ -98,13 +84,18 @@
     svg.append('g').call(xAxis)
 
     svg.append('g').call(yAxis)
-  })
+  }
+
+  onMount(render)
 </script>
 
 <style>
   svg {
     width: 100%;
-    /* height: 25em; */
+  }
+
+  svg :global(*) {
+    font-family: monospace;
   }
 </style>
 

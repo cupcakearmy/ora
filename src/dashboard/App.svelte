@@ -5,6 +5,8 @@
   import Dashboard from './pages/Dashboard.svelte'
   import Limits from './pages/Limits.svelte'
 
+  import { isDev } from '../shared/utils'
+
   const routes = {
     '/': Dashboard,
 
@@ -21,7 +23,9 @@
   }
 </style>
 
-<Dev />
+{#if isDev}
+  <Dev />
+{/if}
 <main>
   <div class="mb-8">
     <a href="../options/index.html"><button class="btn">Options</button></a>

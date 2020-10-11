@@ -1,14 +1,15 @@
 import browser from 'webextension-polyfill'
+import dayjs from 'dayjs'
 
 import { dashboard } from '../shared/utils'
-import { insertLog, normalizeTimestamp, Limits } from '../shared/db'
+import { insertLog, normalizeTimestamp, Limits, DB } from '../shared/db'
 import { getUsageForHost, percentagesToBool } from '../shared/lib'
 
 browser.browserAction.onClicked.addListener(() => browser.tabs.create({ url: dashboard, active: true }))
 
 const frequency = 1000
 
-async function getAllTabs() {
+async function log() {
   try {
     const tabs = await browser.tabs.query({})
     const windows = await browser.windows.getAll()
@@ -35,9 +36,16 @@ async function getAllTabs() {
   } catch {}
 }
 
-setInterval(() => {
-  getAllTabs()
-}, frequency)
+async function deleteOldLogs() {
+  const { retention } = await browser.storage.local.get()
+  const maxAge = dayjs().startOf('day').subtract(retention, 'days').toDate()
+  const toDelete = await DB.logs.where('timestamp').below(maxAge).toArray()
+  const ids = toDelete.map((log) => log.id)
+  await DB.logs.bulkDelete(ids)
+}
+
+setInterval(deleteOldLogs, 5 * 60 * 1000) // Delete old logs every 5 minutes
+setInterval(log, frequency)
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return getUsageForHost(message).then((percentages) => percentagesToBool(percentages))

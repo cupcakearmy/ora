@@ -9,7 +9,7 @@
   },
   "homepage": "https://github.com/cupcakearmy/ora",
   "scripts": {
-    "clean": "rm -rf dist .cache",
+    "clean": "rm -rf dist .cache web-ext-artifacts node_modules",
     "dev": "parcel watch --no-hmr manifest.json src/dashboard/index.html",
     "build": "parcel build --no-content-hash --no-source-maps --no-minify manifest.json src/dashboard/index.html",
     "dist": "rm -rf dist && yarn run build && web-ext build -s dist --overwrite-dest"
@@ -23,6 +23,8 @@
     "dayjs": "^1.8.36",
     "dexie": "^3.0.2",
     "faker": "^5.1.0",
+    "file-saver": "^2.0.2",
+    "joi": "^17.2.1",
     "lodash": "^4.17.20",
     "spectre.css": "^0.5.9",
     "svelte-spa-router": "^2.2.0",

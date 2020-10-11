@@ -29,7 +29,6 @@
   }
 </style>
 
-<!-- <div class="flex flex-col"> -->
 <div class="flex items-center">
   <div class="btn-group">
     <button class="btn btn-sm" on:click={all}>All</button>

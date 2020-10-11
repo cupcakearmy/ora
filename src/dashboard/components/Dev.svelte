@@ -3,14 +3,14 @@
   import day from 'dayjs'
   import { range, random } from 'lodash'
 
-  import { insertLog, normalizeTimestamp, DB } from '../../shared/db'
+  import { insertLog, normalizeTimestamp, DB, clear as clearDB } from '../../shared/db'
 
   let loading = false
 
   async function fill() {
     try {
       loading = true
-      const start = day().subtract('7', 'days').valueOf()
+      const start = day().subtract(2, 'weeks').valueOf()
       const end = Date.now()
       for (const n of range(20)) {
         const host = faker.internet.domainName()
@@ -29,8 +29,7 @@
   async function clear() {
     try {
       loading = true
-      await DB.limits.clear()
-      await DB.logs.clear()
+      await clearDB()
     } finally {
       loading = false
     }
