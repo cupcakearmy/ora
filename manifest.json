@@ -1,21 +1,21 @@
 {
   "manifest_version": 2,
   "name": "Ora",
-  "version": "0.3",
+  "version": "0.4",
 
   "description": "See how much time you spend on each website and set limits",
   "icons": {
-    "512": "icons/watch.svg"
+    "512": "icons/watch.png"
   },
   "browser_action": {
     "default_icon": {
-      "512": "icons/watch.svg"
+      "512": "icons/watch.png"
     },
     "default_title": "Ora Dashboard",
     "theme_icons": [
       {
-        "light": "./icons/watch.svg",
-        "dark": "./icons/watch.svg",
+        "light": "./icons/watch.png",
+        "dark": "./icons/watch-alt.png",
         "size": 512
       }
     ]

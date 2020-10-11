@@ -4,4 +4,6 @@ yarn-error.log
 
 dist
 *.zip
+*.pem
+*.crx
 web-ext-artifacts
