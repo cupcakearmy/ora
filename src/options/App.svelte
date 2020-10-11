@@ -5,6 +5,7 @@
   import dj from 'dayjs'
 
   import FileUpload from './FileUpload.svelte'
+  import Footer from '../shared/footer.svelte'
 
   import { dashboard, isDev } from '../shared/utils'
   import { dump as dumpDB, load as loadDB, clear as clearDB, validate } from '../shared/db'
@@ -103,4 +104,6 @@
     <button class="btn btn-primary" on:click={dump}>Export</button>
     <button class="btn btn-error tooltip" data-tooltip="Hold to delete" use:longPress={clear}>Delete all data</button>
   </div>
+
+  <Footer />
 </main>

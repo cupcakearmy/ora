@@ -6,4 +6,5 @@ dist
 *.zip
 *.pem
 *.crx
+*.afphoto
 web-ext-artifacts

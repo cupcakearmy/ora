@@ -4,6 +4,7 @@
   import Dev from './components/Dev.svelte'
   import Dashboard from './pages/Dashboard.svelte'
   import Limits from './pages/Limits.svelte'
+  import Footer from '../shared/footer.svelte'
 
   import { isDev } from '../shared/utils'
 
@@ -34,4 +35,6 @@
   </div>
 
   <Router {routes} />
+
+  <Footer />
 </main>

@@ -36,7 +36,7 @@
   "devDependencies": {
     "@types/firefox-webext-browser": "^78.0.1",
     "@types/lodash": "^4.14.161",
-    "crx": "^5.0.1",
+    "crx3": "^1.1.2",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-svelte": "^4.0.6",
     "parcel-plugin-web-extension": "^1.6.1",
