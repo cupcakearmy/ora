@@ -18,7 +18,7 @@
 
 <style>
   input {
-    width: 9em !important;
+    width: 7rem !important;
   }
 </style>
 
