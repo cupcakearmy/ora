@@ -2,6 +2,12 @@
   "name": "ora",
   "license": "MIT",
   "private": true,
+  "author": {
+    "name": "Nicco",
+    "email": "hi@nicco.io",
+    "url": "https://nicco.io"
+  },
+  "homepage": "https://github.com/cupcakearmy/ora",
   "scripts": {
     "clean": "rm -rf dist .cache",
     "dev": "parcel watch --no-hmr manifest.json src/dashboard/index.html",
