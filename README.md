@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="70%" src="./store/written.png" alt="logo" />
+</p>
+
 # Ora
 
 Work in progress. Come back soon for more 🚀
