@@ -2,12 +2,7 @@
 
 Work in progress. Come back soon for more 🚀
 
-## Motivation
-
-I wanted to see how much time I was spending on each website and set limits for certain ones.
-Unfortunately I only found paid solutions, or some that were not very estetically pleasing.
-
-## Features
+## 🌈 Features
 
 - Simple Dashboard
 - Set limits for each host
@@ -15,6 +10,11 @@ Unfortunately I only found paid solutions, or some that were not very esteticall
 - Import & Export data
 - 100% Open Source & Local
 - Set retention policy that deletes all logs older than a user specified number of days.
+
+## 🤔 Motivation
+
+I wanted to see how much time I was spending on each website and set limits for certain ones.
+Unfortunately I only found paid solutions, or some that were not very estetically pleasing.
 
 ## Screenshots
 
