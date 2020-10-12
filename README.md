@@ -4,6 +4,8 @@
 
 # Ora
 
+[![Download](./store/download_ff.png)](https://addons.mozilla.org/en-US/firefox/addon/ora-tracker/)
+
 Work in progress. Come back soon for more 🚀
 
 ## 🌈 Features
