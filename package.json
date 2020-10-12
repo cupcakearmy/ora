@@ -13,7 +13,7 @@
     "dev": "parcel watch --no-hmr manifest.json src/dashboard/index.html",
     "build": "parcel build --no-content-hash --no-source-maps --no-minify manifest.json src/dashboard/index.html",
     "dist": "rm -rf dist && yarn run build && yarn pack:ff && yarn pack:crx",
-    "pack:crx": "crx pack ./dist -p ./crx.pem -o ora.crx",
+    "pack:crx": "crx3 pack ./dist -p ./crx.pem -o ora.crx",
     "pack:ff": "web-ext build -s dist --overwrite-dest"
   },
   "browserslist": [
