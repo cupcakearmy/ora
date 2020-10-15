@@ -4,7 +4,8 @@
 
 # Ora
 
-[![Download](./store/download_ff.png)](https://addons.mozilla.org/en-US/firefox/addon/ora-tracker/)
+[![Download link for Firefox](./store/download_ff.png)](https://addons.mozilla.org/en-US/firefox/addon/ora-tracker/)
+[![Download link for Chrome](./store/download_chrome.png)](https://chrome.google.com/webstore/detail/ora/aghpiipfpgdiadkibmddeinngbboajbl)
 
 Work in progress. Come back soon for more 🚀
 
