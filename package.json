@@ -9,7 +9,7 @@
   },
   "homepage": "https://github.com/cupcakearmy/ora",
   "scripts": {
-    "clean": "rm -rf dist .cache web-ext-artifacts node_modules",
+    "clean": "rm -rf dist .cache web-ext-artifacts ora.zip",
     "dev": "parcel watch --no-hmr manifest.json src/dashboard/index.html",
     "build": "parcel build --no-content-hash --no-source-maps --no-minify manifest.json src/dashboard/index.html",
     "dist": "rm -rf dist && yarn run build && yarn pack:ff && yarn run pack:zip",

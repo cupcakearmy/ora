@@ -1,11 +1,14 @@
-.cache
 node_modules
 yarn-error.log
 
+# Build
+.cache
 dist
 *.zip
 *.pem
 *.crx
+web-ext-artifacts
+
+# Design
 *.afphoto
 *.afdesign
-web-ext-artifacts

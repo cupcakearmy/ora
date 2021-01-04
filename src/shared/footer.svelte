@@ -11,8 +11,11 @@
 </style>
 
 <footer>
-  <a href="https://github.com/cupcakearmy/ora" target="_blank" rel="noreferrer">Source Code</a>
-  - v0.5
+  <a
+    href="https://github.com/cupcakearmy/ora"
+    target="_blank"
+    rel="noreferrer">Source Code</a>
+  - v0.6
   <br />
   Made with ❤️ by
   <a href="https://nicco.io" target="_blank" rel="noreferrer">🐘</a>
