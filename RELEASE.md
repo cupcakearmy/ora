@@ -8,3 +8,7 @@
 ## Firefox
 
 Upload `web-ext-artifacts/ora-*.zip` in the [console](https://addons.mozilla.org/de/developers/).
+
+## Chrome
+
+Upload `ora.zip` in the [console](https://chrome.google.com/webstore/devconsole/)

@@ -15,7 +15,7 @@
     href="https://github.com/cupcakearmy/ora"
     target="_blank"
     rel="noreferrer">Source Code</a>
-  - v0.6
+  - v0.7
   <br />
   Made with ❤️ by
   <a href="https://nicco.io" target="_blank" rel="noreferrer">🐘</a>
