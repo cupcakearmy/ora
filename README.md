@@ -2,10 +2,13 @@
   <img width="70%" src="./store/written.png" alt="logo" />
 </p>
 
-# Ora
-
-[![Download link for Firefox](./store/download_ff.png)](https://addons.mozilla.org/en-US/firefox/addon/ora-tracker/)
-[![Download link for Chrome](./store/download_chrome.png)](https://chrome.google.com/webstore/detail/ora/aghpiipfpgdiadkibmddeinngbboajbl)
+<p align="center">
+  <img alt="Firefox Extension Badge" src="https://img.shields.io/amo/users/ora-tracker?label=Firefox" />
+  <img alt="Chrome Extension Badge" src="https://img.shields.io/chrome-web-store/users/aghpiipfpgdiadkibmddeinngbboajbl?label=Chrome" />
+  <br/>
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/ora-tracker/"><img src="./store/download_ff.png" /></a>
+  <a href="https://chrome.google.com/webstore/detail/ora/aghpiipfpgdiadkibmddeinngbboajbl"><img src="./store/download_chrome.png" /></a>
+</p>
 
 ## 🌈 Features
 
