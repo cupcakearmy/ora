@@ -27,7 +27,7 @@
     "faker": "^5.1.0",
     "file-saver": "^2.0.2",
     "joi": "^17.2.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "spectre.css": "^0.5.9",
     "svelte-spa-router": "^3.0.0",
     "tailwindcss": "^1.8.10",
